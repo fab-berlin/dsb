@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 import { useClassReplacementStore } from '@/app/store/useClassReplacement';
-import Index from '@/components/TileGroup';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 
 import '@radix-ui/themes/styles.css';
+import TileGroup from '@/components/TileGroup';
 
 export type ReplacementItem = {
   date: ReplacementItemDate;
@@ -46,9 +46,11 @@ export default function Home() {
   }, []);
 
   return (
-    <Theme>
-      <h1>Bladibla</h1>
-      <Index />
-    </Theme>
+    <main className={'p-8'}>
+      <Theme appearance="dark">
+        <h1 className={'mb-8 text-2xl font-bold'}>DSB - Digitales Schwarzes Brett</h1>
+        <TileGroup />
+      </Theme>
+    </main>
   );
 }

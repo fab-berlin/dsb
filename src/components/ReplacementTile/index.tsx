@@ -1,13 +1,20 @@
 import { ReplacementClassData } from '@/app/page';
+import { Avatar } from '@radix-ui/themes';
 
 const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
   return (
-    <div className={'bg-blue-100 p-4'}>
-      <p className={'text-xl'}>{el?.name}</p>
-      <p className={'inline-block size-8 rounded-full bg-white text-center text-xl text-blue-500'}>
-        {el?.hour}
-      </p>
-      {el?.hour} {el?.newLesson} {el?.newRoom} {el?.oldLesson} {el?.oldRoom}
+    <div className={'rounded-md border p-4'}>
+      <div className="mb-4 flex flex-row flex-nowrap justify-between">
+        <Avatar
+          fallback={el?.name ?? ''}
+          variant="solid"
+          color="orange"
+        />
+        <div className={'flex h-8 min-w-8 items-center justify-center rounded-full bg-white px-2'}>
+          <span className="text-center text-xl text-orange-500">{el?.hour}</span>
+        </div>
+      </div>
+      {el?.newLesson} {el?.newRoom} {el?.oldLesson} {el?.oldRoom}
       <hr />
       {el?.message}
     </div>
