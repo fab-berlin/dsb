@@ -2,6 +2,7 @@ import { useClassReplacementStore } from '@/app/store/useClassReplacement';
 import { useEffect, useState } from 'react';
 import { Select } from '@radix-ui/themes';
 import ReplacementTile from '@/components/ReplacementTile';
+import NoResultTile from '@/components/NoResultTile';
 
 const TileGroup = () => {
   const { replacements } = useClassReplacementStore();
@@ -95,7 +96,7 @@ const TileGroup = () => {
           {replacements[chosenDate].classData.filter((el) => {
             if (chosenClass === '---') return true;
             return el?.name === chosenClass;
-          }).length === 0 && <h3 className={'col-span-full'}>keine Änderungen am Stundenplan</h3>}
+          }).length === 0 && <NoResultTile />}
         </div>
       )}
     </>
