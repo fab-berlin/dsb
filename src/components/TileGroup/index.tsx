@@ -14,6 +14,7 @@ const TileGroup = () => {
 
   const handleSelect = (e: string) => {
     setChosenDate(e);
+    setChosenClass('---');
   };
   const handleClassSelect = (e: string) => {
     setChosenClass(e);
@@ -27,11 +28,11 @@ const TileGroup = () => {
     );
     const uniqueClasses = Array.from(uniqueClassesSet);
     setAvailableClasses(uniqueClasses);
-  }, [chosenDate]);
+  }, [chosenDate, replacements]);
 
   return (
     <>
-      <div className={'flex flex-row flex-wrap justify-between'}>
+      <div className={'flex flex-row flex-wrap justify-between md:justify-start md:gap-x-4'}>
         <Select.Root
           onValueChange={handleSelect}
           size="3"
@@ -54,37 +55,39 @@ const TileGroup = () => {
           </Select.Content>
         </Select.Root>
 
-        <div className={'max-w-1/2'}>
-          <Select.Root
-            onValueChange={handleClassSelect}
-            size="3"
-          >
-            <Select.Trigger placeholder="wähle die Klasse">{chosenClass}</Select.Trigger>
-            <Select.Content
-              position="popper"
-              sideOffset={5}
+        {chosenDate && (
+          <div className={'max-w-1/2'}>
+            <Select.Root
+              onValueChange={handleClassSelect}
+              size="3"
             >
-              <Select.Group>
-                <Select.Item value="---">---</Select.Item>
-                {availableClasses.map((name) => (
-                  <Select.Item
-                    key={name}
-                    value={name}
-                  >
-                    {name}
-                  </Select.Item>
-                ))}
-              </Select.Group>
-            </Select.Content>
-          </Select.Root>
-        </div>
+              <Select.Trigger placeholder="wähle die Klasse">{chosenClass}</Select.Trigger>
+              <Select.Content
+                position="popper"
+                sideOffset={5}
+              >
+                <Select.Group>
+                  <Select.Item value="---">---</Select.Item>
+                  {availableClasses.map((name) => (
+                    <Select.Item
+                      key={name}
+                      value={name}
+                    >
+                      {name}
+                    </Select.Item>
+                  ))}
+                </Select.Group>
+              </Select.Content>
+            </Select.Root>
+          </div>
+        )}
       </div>
 
       {chosenDate !== '' && (
-        <div className={'mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2'}>
+        <div className={'mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4'}>
           {replacements[chosenDate].classData
             .filter((el) => {
-              if (chosenClass === '---') return true;
+              if (chosenClass === '---' || !chosenClass.trim()) return true;
               return el?.name === chosenClass;
             })
             .map((el, i) => (
@@ -94,7 +97,7 @@ const TileGroup = () => {
               />
             ))}
           {replacements[chosenDate].classData.filter((el) => {
-            if (chosenClass === '---') return true;
+            if (chosenClass === '---' || !chosenClass.trim()) return true;
             return el?.name === chosenClass;
           }).length === 0 && <NoResultTile />}
         </div>

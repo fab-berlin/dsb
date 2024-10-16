@@ -43,11 +43,14 @@ export default function Home() {
     fetchData().catch((err) => console.error(err));
 
     return () => controller.abort();
-  }, []);
+  }, [parseAndSetData]);
 
   return (
     <main className={'p-8'}>
-      <Theme appearance="dark">
+      <Theme
+        appearance="dark"
+        hasBackground={false}
+      >
         <h1 className={'mb-8 text-2xl font-bold'}>DSB - Digitales Schwarzes Brett</h1>
         <TileGroup />
       </Theme>

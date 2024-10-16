@@ -28,7 +28,7 @@ interface ClassReplacementStore {
   error: string | null;
 }
 
-export const useClassReplacementStore = create<ClassReplacementStore>((set, get) => ({
+export const useClassReplacementStore = create<ClassReplacementStore>((set) => ({
   replacements: {},
   isLoading: false,
   error: null,

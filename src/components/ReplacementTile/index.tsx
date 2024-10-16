@@ -3,7 +3,7 @@ import { Avatar } from '@radix-ui/themes';
 
 const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
   return (
-    <div className={'rounded-md border p-4'}>
+    <div className={'rounded-md border bg-gray-800 p-4'}>
       <div className="mb-4 flex flex-row flex-nowrap justify-between gap-x-4">
         {(el?.name.trim() ?? '').length <= 6 && (
           <Avatar
