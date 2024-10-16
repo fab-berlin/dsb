@@ -32,59 +32,61 @@ const TileGroup = () => {
 
   return (
     <>
-      <div className={'flex flex-row flex-wrap justify-between md:justify-start md:gap-x-4'}>
-        <Select.Root
-          onValueChange={handleSelect}
-          size="3"
-        >
-          <Select.Trigger placeholder="wähle den Tag">{chosenDate}</Select.Trigger>
-          <Select.Content
-            position="popper"
-            sideOffset={5}
+      {Object.keys(replacements).length > 0 && (
+        <div className={'flex flex-row flex-wrap justify-between md:justify-start md:gap-x-4'}>
+          <Select.Root
+            onValueChange={handleSelect}
+            size="3"
           >
-            <Select.Group>
-              {Object.keys(replacements).map((day) => (
-                <Select.Item
-                  key={day}
-                  value={replacements[day].replacementDate.dateString}
-                >
-                  {replacements[day].replacementDate.dateString}
-                </Select.Item>
-              ))}
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-
-        {chosenDate && (
-          <div className={'max-w-1/2'}>
-            <Select.Root
-              onValueChange={handleClassSelect}
-              size="3"
+            <Select.Trigger placeholder="wähle den Tag">{chosenDate}</Select.Trigger>
+            <Select.Content
+              position="popper"
+              sideOffset={5}
             >
-              <Select.Trigger placeholder="wähle die Klasse">{chosenClass}</Select.Trigger>
-              <Select.Content
-                position="popper"
-                sideOffset={5}
+              <Select.Group>
+                {Object.keys(replacements).map((day) => (
+                  <Select.Item
+                    key={day}
+                    value={replacements[day].replacementDate.dateString}
+                  >
+                    {replacements[day].replacementDate.dateString}
+                  </Select.Item>
+                ))}
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
+
+          {chosenDate && (
+            <div className={'max-w-1/2'}>
+              <Select.Root
+                onValueChange={handleClassSelect}
+                size="3"
               >
-                <Select.Group>
-                  <Select.Item value="---">---</Select.Item>
-                  {availableClasses.map((name) => (
-                    <Select.Item
-                      key={name}
-                      value={name}
-                    >
-                      {name}
-                    </Select.Item>
-                  ))}
-                </Select.Group>
-              </Select.Content>
-            </Select.Root>
-          </div>
-        )}
-      </div>
+                <Select.Trigger placeholder="wähle die Klasse">{chosenClass}</Select.Trigger>
+                <Select.Content
+                  position="popper"
+                  sideOffset={5}
+                >
+                  <Select.Group>
+                    <Select.Item value="---">---</Select.Item>
+                    {availableClasses.map((name) => (
+                      <Select.Item
+                        key={name}
+                        value={name}
+                      >
+                        {name}
+                      </Select.Item>
+                    ))}
+                  </Select.Group>
+                </Select.Content>
+              </Select.Root>
+            </div>
+          )}
+        </div>
+      )}
 
       {chosenDate !== '' && (
-        <div className={'mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4'}>
+        <div className={'mt-8 grid grid-cols-1 gap-4 pb-20 sm:grid-cols-2 md:grid-cols-4'}>
           {replacements[chosenDate].classData
             .filter((el) => {
               if (chosenClass === '---' || !chosenClass.trim()) return true;
