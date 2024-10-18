@@ -1,7 +1,9 @@
 export async function GET() {
+  const user = process.env.DSB_USER;
+  const password = process.env.DSB_PASSWORD;
   const replacementData: string[] = [];
   let data = await fetch(
-    'https://mobileapi.dsbcontrol.de/authid?user=userid&password=password&bundleid=de.heinekingmedia.dsbmobile&appversion=35&osversion=22&pushid',
+    `https://mobileapi.dsbcontrol.de/authid?user=${user}&password=${password}&bundleid=de.heinekingmedia.dsbmobile&appversion=35&osversion=22&pushid`,
     { cache: 'no-store' }
   );
   data = await fetch(`https://mobileapi.dsbcontrol.de/dsbtimetables?authid=${await data.json()}`);
