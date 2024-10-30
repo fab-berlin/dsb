@@ -9,26 +9,6 @@ import '@radix-ui/themes/styles.css';
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 
-export type ReplacementItem = {
-  date: ReplacementItemDate;
-  classData: ReplacementClassData[];
-};
-type ReplacementItemDate = {
-  date: string;
-  day: 'Montag' | 'Dienstag' | 'Mittwoch' | 'Donnerstag' | 'Freitag';
-  sorting: string;
-};
-export type ReplacementClassData = {
-  cancellation: string;
-  hour: string;
-  message: string;
-  name: string;
-  newLesson: string;
-  newRoom: string;
-  oldLesson: string;
-  oldRoom: string;
-};
-
 export default function Home() {
   const [manualUpdate, setManualUpdate] = useState(false);
   const { parseAndSetData } = useClassReplacementStore();

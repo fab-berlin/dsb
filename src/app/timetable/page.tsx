@@ -4,22 +4,8 @@ import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
 import { useEffect, useState } from 'react';
-
-type TimetableHour = {
-  name: string;
-  type: string;
-  length: string;
-  startType: 'A' | 'E';
-  startTime: string;
-  endTime: string;
-};
-type TimetableDayItem = {
-  day: string;
-  houres: TimetableHour[];
-};
-type Timetable = {
-  timetable: TimetableDayItem[];
-};
+import type { Timetable } from '@/types/types';
+import TimetableView from '@/components/TimetableView';
 
 export default function Page() {
   const [timetableData, setTimetableData] = useState<Timetable | null>(null);
@@ -45,7 +31,10 @@ export default function Page() {
         appearance="dark"
         hasBackground={false}
       >
-        <ViewArea>{timetableData?.timetable.map((el) => <p key={el.day}>{el.day}</p>)}</ViewArea>
+        <ViewArea>
+          <h1 className={'mb-8 text-2xl font-bold'}>Stundenplan</h1>
+          <TimetableView timetable={timetableData?.timetable ?? []} />
+        </ViewArea>
       </Theme>
     </main>
   );
