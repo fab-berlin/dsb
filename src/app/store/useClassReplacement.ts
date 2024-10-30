@@ -87,7 +87,7 @@ export const useClassReplacementStore = create<ClassReplacementStore>((set) => (
 }));
 
 const extractDate = (data: string): { dateString: string; weekday: string } => {
-  const pattern = /(\d{2}\.\d{2}\.\d{4})\s(\w+)\s\(Seite\s(\d+)\s\//;
+  const pattern = /(\d{1,2}\.\d{1,2}\.\d{4})\s(\w+)(?:\s\(Seite\s(\d+)\s\/)?/;
   const match = data.match(pattern);
 
   if (match) {
