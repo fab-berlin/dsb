@@ -1,4 +1,4 @@
-import { ReplacementClassData } from '@/app/page';
+import { ReplacementClassData } from '@/types/types';
 import { Avatar } from '@radix-ui/themes';
 
 const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
