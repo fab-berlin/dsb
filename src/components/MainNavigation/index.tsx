@@ -1,21 +1,10 @@
 'use client';
 
 import { BackpackIcon, TableIcon } from '@radix-ui/react-icons';
-import { ReactNode, useEffect } from 'react';
-import Link from 'next/link';
-import { useNavigationStore } from '@/app/store/useNavigationStore';
-import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const MainNavigation = () => {
-  const currentPath = usePathname();
-  const { setCurrentRoute } = useNavigationStore();
-
-  useEffect(() => {
-    if (currentPath) {
-      setCurrentRoute(currentPath);
-    }
-  }, [currentPath, setCurrentRoute]);
-
   return (
     <nav
       className={
@@ -55,19 +44,25 @@ const MainNavigationItem = ({
   route: string;
   children: ReactNode;
 }) => {
-  const { currentRoute, setCurrentRoute } = useNavigationStore();
-  const activeClass = currentRoute === route ? 'opacity-100' : 'opacity-40';
+  const router = useRouter();
+  const currentPath = usePathname();
+  const activeClass = currentPath === route ? 'opacity-100' : 'opacity-40';
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    router.push(route);
+  };
 
   return (
     <div className="">
-      <Link
+      <a
         href={route}
         className={`flex flex-col items-center justify-center gap-y-1 ${activeClass}`}
-        onClick={() => setCurrentRoute(route)}
+        onClick={handleClick}
       >
         {children}
         <span className={'text-xs'}>{label}</span>
-      </Link>
+      </a>
     </div>
   );
 };

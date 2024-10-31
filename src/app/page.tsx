@@ -8,8 +8,11 @@ import { Theme, Spinner } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const router = useRouter();
   const [manualUpdate, setManualUpdate] = useState(false);
   const { parseAndSetData } = useClassReplacementStore();
 
