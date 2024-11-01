@@ -18,20 +18,22 @@ const TimetableView = ({ timetable }: { timetable: TimetableDayItem[] }) => {
   };
 
   return (
-    <Swiper
-      spaceBetween={24}
-      slidesPerView={1}
-      loop={true}
-      breakpoints={breakpoints}
-    >
-      {timetable.map((el) => (
-        <SwiperSlide key={el.day}>
-          <p>{el.day}</p>
+    <div className={'h-[calc(100vh-144px-16px)] overflow-auto'}>
+      <Swiper
+        spaceBetween={24}
+        slidesPerView={1}
+        loop={true}
+        breakpoints={breakpoints}
+      >
+        {timetable.map((el) => (
+          <SwiperSlide key={el.day}>
+            <p className={'mb-4 text-xl'}>{el.day}</p>
 
-          <TimetableDay data={el.hours} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+            <TimetableDay data={el.hours} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

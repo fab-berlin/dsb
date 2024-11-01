@@ -41,14 +41,14 @@ export default function Home() {
   };
 
   return (
-    <main className={'p-4'}>
+    <main className={'h-screen overflow-hidden'}>
       <Theme
         appearance="dark"
         hasBackground={false}
       >
         <ViewArea>
           <h1
-            className={'mb-8 text-2xl font-bold'}
+            className={'mb-8 pt-4 text-2xl font-bold'}
             onClick={handleUpdate}
           >
             DSB <span className={'text-xs'}>Digitales Schwarzes Brett</span>

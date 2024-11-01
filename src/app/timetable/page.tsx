@@ -26,13 +26,13 @@ export default function Page() {
   }, []);
 
   return (
-    <main className={'p-4'}>
+    <main className={'h-screen overflow-hidden'}>
       <Theme
         appearance="dark"
         hasBackground={false}
       >
         <ViewArea>
-          <h1 className={'mb-8 text-2xl font-bold'}>Stundenplan</h1>
+          <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Stundenplan</h1>
           <TimetableView timetable={timetableData?.timetable ?? []} />
         </ViewArea>
       </Theme>

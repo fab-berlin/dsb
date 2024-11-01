@@ -86,7 +86,11 @@ const TileGroup = () => {
       )}
 
       {chosenDate !== '' && (
-        <div className={'mt-8 grid grid-cols-1 gap-4 pb-20 sm:grid-cols-2 md:grid-cols-4'}>
+        <div
+          className={
+            'my-4 grid h-[calc(100vh-184px-32px)] grid-cols-1 gap-4 overflow-auto sm:grid-cols-2 md:grid-cols-4'
+          }
+        >
           {replacements[chosenDate].classData
             .filter((el) => {
               if (chosenClass === '---' || !chosenClass.trim()) return true;
