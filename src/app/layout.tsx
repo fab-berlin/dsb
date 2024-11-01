@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import MainNavigation from '@/components/MainNavigation';
+import App from '@/app/_app';
 
 export const metadata: Metadata = {
   title: 'DSB - in beautiful',
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body>
-        {children}
-        <MainNavigation />
+        <App>
+          {children}
+          <MainNavigation />
+        </App>
       </body>
     </html>
   );
