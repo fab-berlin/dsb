@@ -1,0 +1,14 @@
+[
+  {
+    "id": "900134011",
+    "label": "Buchholz Kirche",
+    "name": "Französisch Buchholz Kirche (Berlin)",
+    "directions": [
+      {
+        "id": "900134511",
+        "label": "Franz. Buchholz, Guyotstr.",
+        "name": "Guyotstr. (Berlin)"
+      }
+    ]
+  }
+]

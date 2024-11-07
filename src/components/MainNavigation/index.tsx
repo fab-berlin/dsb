@@ -29,6 +29,15 @@ const MainNavigation = () => {
           height="30"
         />
       </MainNavigationItem>
+      <MainNavigationItem
+        label={'Abfahrten'}
+        route={'/departure'}
+      >
+        <TableIcon
+          width="30"
+          height="30"
+        />
+      </MainNavigationItem>
     </nav>
   );
 };
