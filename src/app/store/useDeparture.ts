@@ -24,8 +24,8 @@ export const useDepartureStore = create<ClassDepartureStore>((set) => ({
 
   parseAndSetDepartures: (data: DepartureDataStructure) => {
     set({ isLoading: true, error: null });
-
+    console.log('zustand data', data);
     // TODO: reduce the loaded data to comply with the defined type
-    set({ departures: data });
+    //set({ departures: data });
   },
 }));

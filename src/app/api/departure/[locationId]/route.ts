@@ -11,10 +11,13 @@ export async function GET(request: Request, { params }: { params: { locationId: 
 
   console.log(locationData);*/
 
-  console.log(`https://v6.bvg.transport.rest/stops/${stationId}/departures?results=10&duration=90`);
+  console.log(
+    `https://v6.bvg.transport.rest/stops/${stationId}/departures?results=10&duration=90&when=now`
+  );
 
   const departureResponse = await fetch(
-    `https://v6.bvg.transport.rest/stops/${stationId}/departures?results=10&duration=90`
+    `https://v6.bvg.transport.rest/stops/${stationId}/departures?results=10&duration=90`,
+    { cache: 'no-store' }
   );
   const departureData = await departureResponse.json();
 
