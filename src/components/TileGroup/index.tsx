@@ -6,13 +6,22 @@ import NoResultTile from '@/components/NoResultTile';
 
 const TileGroup = () => {
   const { replacements } = useClassReplacementStore();
-
+  const [manualTrigger, setManualTrigger] = useState(false);
   const [chosenDate, setChosenDate] = useState('');
   const [chosenClass, setChosenClass] = useState('');
+  const [isDateAvailable, setIsDateAvailable] = useState(false);
 
   const [availableClasses, setAvailableClasses] = useState<string[]>([]);
 
+  const currentDate = new Date();
+  const currentDateString = currentDate.toLocaleDateString('de-DE', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric',
+  });
+
   const handleSelect = (e: string) => {
+    setManualTrigger(true);
     setChosenDate(e);
     setChosenClass('---');
   };
@@ -30,6 +39,11 @@ const TileGroup = () => {
     setAvailableClasses(uniqueClasses);
   }, [chosenDate, replacements]);
 
+  useEffect(() => {
+    setIsDateAvailable(currentDateString in replacements);
+    if (currentDateString in replacements) setChosenDate(currentDateString);
+  }, [currentDateString, replacements]);
+
   return (
     <>
       {Object.keys(replacements).length > 0 && (
@@ -37,6 +51,8 @@ const TileGroup = () => {
           <Select.Root
             onValueChange={handleSelect}
             size="3"
+            {...(isDateAvailable && !manualTrigger && { value: currentDateString })}
+            {...(isDateAvailable && manualTrigger && { value: chosenDate })}
           >
             <Select.Trigger placeholder="wähle den Tag">{chosenDate}</Select.Trigger>
             <Select.Content
