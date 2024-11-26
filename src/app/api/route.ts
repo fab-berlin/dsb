@@ -1,13 +1,16 @@
-export async function GET() {
-  const user = process.env.DSB_USER;
-  const password = process.env.DSB_PASSWORD;
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const { authToken } = body;
   const replacementData: string[] = [];
-  let data = await fetch(
-    `https://mobileapi.dsbcontrol.de/authid?user=${user}&password=${password}&bundleid=de.heinekingmedia.dsbmobile&appversion=35&osversion=22&pushid`,
-    { cache: 'no-store' }
-  );
-  data = await fetch(`https://mobileapi.dsbcontrol.de/dsbtimetables?authid=${await data.json()}`);
+  const data = await fetch(`https://mobileapi.dsbcontrol.de/dsbtimetables?authid=${authToken}`);
   const childData = await data.json();
+
+  // Error messages are a bit short, without status code
+  if (!childData[0]) {
+    return NextResponse.json({ error: childData.Message });
+  }
 
   for (const el of childData[0].Childs) {
     try {
@@ -18,5 +21,5 @@ export async function GET() {
       console.error(e);
     }
   }
-  return Response.json(replacementData);
+  return NextResponse.json(replacementData);
 }

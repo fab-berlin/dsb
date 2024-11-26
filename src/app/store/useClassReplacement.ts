@@ -1,7 +1,5 @@
 import { create } from 'zustand';
 
-// ... (previous types and interfaces)
-
 export interface ReplacementClassData {
   name: string;
   hour: string;
@@ -82,8 +80,6 @@ export const useClassReplacementStore = create<ClassReplacementStore>((set) => (
       set({ error: 'Error parsing data: ' + error, isLoading: false });
     }
   },
-
-  // ... (other actions)
 }));
 
 const extractDate = (data: string): { dateString: string; weekday: string } => {

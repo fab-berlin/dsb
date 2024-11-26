@@ -33,3 +33,8 @@ export type TimetableDayItem = {
 export type Timetable = {
   timetable: TimetableDayItem[];
 };
+
+export interface LoginRequestBody {
+  user: string;
+  password: string;
+}

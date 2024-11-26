@@ -9,6 +9,7 @@ import '@radix-ui/themes/styles.css';
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
+import { useAuthentication } from '@/app/store/useAuthentication';
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,13 +17,52 @@ export default function Home() {
   const [manualUpdate, setManualUpdate] = useState(false);
   const { parseAndSetData } = useClassReplacementStore();
 
+  const { authToken, setAuthToken, resetAuthToken } = useAuthentication();
+
+  const resetLogin = () => {
+    resetAuthToken();
+    sessionStorage.removeItem('authToken');
+    router.push('/login');
+    return false;
+  };
+
+  useEffect(() => {
+    if (!authToken) {
+      const token = sessionStorage.getItem('authToken');
+      if (token) {
+        setAuthToken(token);
+        router.push('/');
+      }
+    }
+  }, [authToken, router, setAuthToken]);
+
+  useEffect(() => {
+    if (!authToken) {
+      router.push('/login');
+    }
+  }, [authToken, router]);
+
   useEffect(() => {
     setManualUpdate(true);
     const controller = new AbortController();
     const signal = controller.signal;
+
     const fetchData = async () => {
-      const response = await fetch('/api', { signal });
+      const response = await fetch('/api', {
+        signal,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ authToken }),
+      });
       const data = await response.json();
+      console.log(data);
+
+      if (data.error) {
+        resetLogin();
+      }
+
       await parseAndSetData(data);
       await setManualUpdate(false);
     };
@@ -30,7 +70,7 @@ export default function Home() {
     fetchData().catch((err) => console.error(err));
 
     return () => controller.abort();
-  }, [parseAndSetData]);
+  }, [authToken, parseAndSetData]);
 
   const handleUpdate = async () => {
     setManualUpdate(true);
