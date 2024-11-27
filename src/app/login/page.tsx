@@ -75,7 +75,7 @@ export default function Page() {
                     name={'username'}
                     required
                     size={'3'}
-                    value={savedUser}
+                    defaultValue={savedUser}
                   ></TextField.Root>
                   <TextField.Root
                     placeholder={'Passwort'}
@@ -83,7 +83,7 @@ export default function Page() {
                     required
                     size={'3'}
                     type={'password'}
-                    value={savedPass}
+                    defaultValue={savedPass}
                   ></TextField.Root>
                   <Text
                     as="label"
