@@ -1,9 +1,9 @@
 'use client';
 
-import { FormEvent, useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useAuthentication } from '@/app/store/useAuthentication';
 import { useRouter } from 'next/navigation';
-import { Button, Card, Flex, TextField, Theme } from '@radix-ui/themes';
+import { Button, Card, Flex, Switch, TextField, Theme, Text } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
 
 import '@radix-ui/themes/styles.css';
@@ -11,12 +11,17 @@ import '@radix-ui/themes/styles.css';
 export default function Page() {
   const router = useRouter();
   const { authToken, setAuthToken } = useAuthentication();
+
+  const [savedUser, setSavedUser] = useState('');
+  const [savedPass, setSavedPass] = useState('');
+
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.currentTarget);
     const username = formData.get('username');
     const password = formData.get('password');
+    const saveCredentials = formData.get('persistcredentials') === 'on';
 
     const response = await fetch('/api/authenticate', {
       method: 'POST',
@@ -28,8 +33,18 @@ export default function Page() {
     const token = await response.json();
     setAuthToken(token.authToken);
     sessionStorage.setItem('authToken', token.authToken);
+
+    if (token.authToken && saveCredentials) {
+      localStorage.setItem('user', username as string);
+      localStorage.setItem('password', password as string);
+    }
     router.push('/');
   };
+
+  useEffect(() => {
+    setSavedUser(localStorage.getItem('user') ?? '');
+    setSavedPass(localStorage.getItem('password') ?? '');
+  }, []);
 
   useEffect(() => {
     if (authToken) router.push('/');
@@ -60,6 +75,7 @@ export default function Page() {
                     name={'username'}
                     required
                     size={'3'}
+                    value={savedUser}
                   ></TextField.Root>
                   <TextField.Root
                     placeholder={'Passwort'}
@@ -67,7 +83,22 @@ export default function Page() {
                     required
                     size={'3'}
                     type={'password'}
+                    value={savedPass}
                   ></TextField.Root>
+                  <Text
+                    as="label"
+                    size="2"
+                    className={'my-4'}
+                  >
+                    <Flex gap="2">
+                      <Switch
+                        name={'persistcredentials'}
+                        size="3"
+                        defaultChecked
+                      />
+                      Daten speichern
+                    </Flex>
+                  </Text>
                   <Button
                     type={'submit'}
                     size={'3'}
