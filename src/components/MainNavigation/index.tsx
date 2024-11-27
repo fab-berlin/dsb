@@ -3,33 +3,40 @@
 import { BackpackIcon, TableIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { useAuthentication } from '@/app/store/useAuthentication';
 
 const MainNavigation = () => {
+  const { authToken } = useAuthentication();
+
   return (
-    <nav
-      className={
-        'fixed bottom-0 left-0 flex h-16 w-full flex-row items-center justify-center justify-evenly gap-x-4 border-t border-gray-300 bg-black'
-      }
-    >
-      <MainNavigationItem
-        label={'DSB'}
-        route={'/'}
-      >
-        <BackpackIcon
-          width="30"
-          height="30"
-        />
-      </MainNavigationItem>
-      <MainNavigationItem
-        label={'Stundenplan'}
-        route={'/timetable'}
-      >
-        <TableIcon
-          width="30"
-          height="30"
-        />
-      </MainNavigationItem>
-    </nav>
+    <>
+      {authToken && (
+        <nav
+          className={
+            'fixed bottom-0 left-0 flex h-16 w-full flex-row items-center justify-center justify-evenly gap-x-4 border-t border-gray-300 bg-black'
+          }
+        >
+          <MainNavigationItem
+            label={'DSB'}
+            route={'/'}
+          >
+            <BackpackIcon
+              width="30"
+              height="30"
+            />
+          </MainNavigationItem>
+          <MainNavigationItem
+            label={'Stundenplan'}
+            route={'/timetable'}
+          >
+            <TableIcon
+              width="30"
+              height="30"
+            />
+          </MainNavigationItem>
+        </nav>
+      )}
+    </>
   );
 };
 

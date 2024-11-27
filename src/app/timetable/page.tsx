@@ -6,9 +6,19 @@ import ViewArea from '@/components/ViewArea';
 import { useEffect, useState } from 'react';
 import type { Timetable } from '@/types/types';
 import TimetableView from '@/components/TimetableView';
+import { useAuthentication } from '@/app/store/useAuthentication';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [timetableData, setTimetableData] = useState<Timetable | null>(null);
+  const { authToken } = useAuthentication();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authToken) {
+      router.push('/login');
+    }
+  }, [authToken, router]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,10 +41,12 @@ export default function Page() {
         appearance="dark"
         hasBackground={false}
       >
-        <ViewArea>
-          <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Stundenplan</h1>
-          <TimetableView timetable={timetableData?.timetable ?? []} />
-        </ViewArea>
+        {authToken && (
+          <ViewArea>
+            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Stundenplan</h1>
+            <TimetableView timetable={timetableData?.timetable ?? []} />
+          </ViewArea>
+        )}
       </Theme>
     </main>
   );

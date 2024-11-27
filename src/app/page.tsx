@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useClassReplacementStore } from '@/app/store/useClassReplacement';
-import '@radix-ui/themes/styles.css';
 import { Theme, Spinner } from '@radix-ui/themes';
 
 import '@radix-ui/themes/styles.css';
+
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
@@ -57,7 +57,6 @@ export default function Home() {
         body: JSON.stringify({ authToken }),
       });
       const data = await response.json();
-      console.log(data);
 
       if (data.error) {
         resetLogin();
