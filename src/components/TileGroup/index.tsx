@@ -15,8 +15,8 @@ const TileGroup = () => {
 
   const currentDate = new Date();
   const currentDateString = currentDate.toLocaleDateString('de-DE', {
-    month: '2-digit',
-    day: '2-digit',
+    month: 'numeric',
+    day: 'numeric',
     year: 'numeric',
   });
 
