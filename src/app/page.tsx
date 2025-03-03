@@ -72,8 +72,17 @@ export default function Home() {
   }, [authToken, parseAndSetData]);
 
   const handleUpdate = async () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     setManualUpdate(true);
-    const response = await fetch('/api');
+    const response = await fetch('/api', {
+      signal,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ authToken }),
+    });
     const data = await response.json();
     await parseAndSetData(data);
     await setManualUpdate(false);
@@ -95,7 +104,7 @@ export default function Home() {
           {!manualUpdate && <TileGroup />}
           {manualUpdate && (
             <div
-              className={'fixed left-0 top-0 flex h-screen w-screen items-center justify-center'}
+              className={'fixed top-0 left-0 flex h-screen w-screen items-center justify-center'}
             >
               <Spinner size={'3'} />
             </div>
