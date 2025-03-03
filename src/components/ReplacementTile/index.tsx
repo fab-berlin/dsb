@@ -17,9 +17,13 @@ const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
         )}
         {el?.hour.trim() && (
           <div
-            className={'flex h-8 min-w-8 items-center justify-center rounded-full bg-white px-2'}
+            className={
+              '@container flex h-8 min-w-8 items-center justify-center rounded-full bg-white px-2'
+            }
           >
-            <span className="text-center text-xl text-orange-500">{el?.hour}</span>
+            <span className="@lg:text-blue-500 text-center text-xl text-orange-500">
+              {el?.hour}
+            </span>
           </div>
         )}
       </div>

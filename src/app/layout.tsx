@@ -22,11 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={'px-4'}>
-        <App>
-          {children}
-          <MainNavigation />
-        </App>
+      <body>
+        <div className="px-4">
+          <App>
+            {children}
+            <MainNavigation />
+          </App>
+        </div>
       </body>
     </html>
   );
