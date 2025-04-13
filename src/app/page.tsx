@@ -10,6 +10,7 @@ import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
 import { useAuthentication } from '@/app/store/useAuthentication';
+import VersionBadge from '@/components/VersionBadge';
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -66,7 +67,12 @@ export default function Home() {
       await setManualUpdate(false);
     };
 
-    fetchData().catch((err) => console.error(err));
+    fetchData().catch((err) => {
+      if (err.name === 'AbortError') {
+        console.log('Fetch aborted');
+        // This is normal during cleanup, so we don't need to set an error state
+      }
+    });
 
     return () => controller.abort();
   }, [authToken, parseAndSetData]);
@@ -95,12 +101,15 @@ export default function Home() {
         hasBackground={false}
       >
         <ViewArea>
-          <h1
-            className={'mb-8 pt-4 text-2xl font-bold'}
-            onClick={handleUpdate}
-          >
-            DSB <span className={'text-xs'}>Digitales Schwarzes Brett</span>
-          </h1>
+          <div className="relative flex flex-row items-baseline justify-between">
+            <h1
+              className={'mb-8 pt-4 text-2xl font-bold'}
+              onClick={handleUpdate}
+            >
+              DSB <span className={'text-xs'}>Digitales Schwarzes Brett</span>
+            </h1>
+            <VersionBadge />
+          </div>
           {!manualUpdate && <TileGroup />}
           {manualUpdate && (
             <div
