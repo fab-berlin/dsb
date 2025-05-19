@@ -44,7 +44,7 @@ export default function Page() {
     });
 
     return () => controller.abort();
-  }, []);
+  }, [parseMeals]);
 
   return (
     <main className={'h-screen overflow-hidden'}>

@@ -9,7 +9,7 @@ interface MealsStore {
   parseMeals: (mealData: string) => void;
 }
 
-export const useMeals = create<MealsStore>((set, get) => ({
+export const useMeals = create<MealsStore>((set) => ({
   meals: [],
   parseMeals: (mealData: string) => {
     const parser = new DOMParser();
