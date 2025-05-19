@@ -1,6 +1,6 @@
 'use client';
 
-import { BackpackIcon, TableIcon } from '@radix-ui/react-icons';
+import { BackpackIcon, CookieIcon, TableIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthentication } from '@/app/store/useAuthentication';
@@ -30,6 +30,15 @@ const MainNavigation = () => {
             route={'/timetable'}
           >
             <TableIcon
+              width="30"
+              height="30"
+            />
+          </MainNavigationItem>
+          <MainNavigationItem
+            label={'Mittagessen'}
+            route={'/food'}
+          >
+            <CookieIcon
               width="30"
               height="30"
             />
