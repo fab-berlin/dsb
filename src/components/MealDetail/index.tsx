@@ -10,7 +10,7 @@ const MealDetail = ({ mealName, mealDate }: Meal) => {
 
   return (
     <div className={'rounded-md border bg-gray-800 p-4'}>
-      <span className={'mr-8 font-bold'}>{parsedDate}</span>
+      <span className={'mb-4 block font-bold'}>{parsedDate}</span>
       <span>{mealName}</span>
     </div>
   );

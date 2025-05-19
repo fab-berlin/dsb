@@ -70,7 +70,7 @@ const MainNavigationItem = ({
   };
 
   return (
-    <div className="">
+    <div className="w-1/3">
       <a
         href={route}
         className={`flex flex-col items-center justify-center gap-y-1 ${activeClass}`}
