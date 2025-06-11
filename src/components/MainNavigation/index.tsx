@@ -13,7 +13,7 @@ const MainNavigation = () => {
       {authToken && (
         <nav
           className={
-            'fixed bottom-0 left-0 flex h-16 w-full flex-row items-center justify-center justify-evenly gap-x-4 border-t border-gray-300 bg-black'
+            'items-top fixed bottom-0 left-0 flex h-24 w-full flex-row justify-evenly gap-x-4 border-t border-gray-300 bg-black pt-2'
           }
         >
           <MainNavigationItem

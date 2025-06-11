@@ -18,7 +18,7 @@ const TimetableView = ({ timetable }: { timetable: TimetableDayItem[] }) => {
   };
 
   return (
-    <div className={'h-[calc(100vh-144px-16px)] overflow-auto'}>
+    <div className={'h-[calc(100vh-144px-40px)] overflow-auto'}>
       <Swiper
         spaceBetween={24}
         slidesPerView={1}

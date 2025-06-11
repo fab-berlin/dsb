@@ -104,7 +104,7 @@ const TileGroup = () => {
       {chosenDate !== '' && (
         <div
           className={
-            'my-4 grid h-[calc(100vh-184px-32px)] grid-cols-1 gap-4 overflow-auto sm:grid-cols-2 md:grid-cols-4'
+            'my-4 grid h-[calc(100vh-184px-60px)] grid-cols-1 gap-4 overflow-auto sm:grid-cols-2 md:grid-cols-4'
           }
         >
           {replacements[chosenDate].classData

@@ -54,8 +54,8 @@ export default function Page() {
       >
         {authToken && (
           <ViewArea>
-            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Essenplan</h1>
-            <ul>
+            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Mittagessen</h1>
+            <ul className={'flex flex-col gap-y-4'}>
               {meals.map((meal) => (
                 <li key={meal.mealDate}>
                   <MealDetail
