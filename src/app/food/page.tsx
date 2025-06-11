@@ -2,10 +2,10 @@
 
 import { Theme } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useMeals } from '@/app/store/useMeals';
+import { useMeals } from '@/store/useMeals';
 import MealDetail from '@/components/MealDetail';
 
 export default function Page() {
@@ -54,7 +54,7 @@ export default function Page() {
       >
         {authToken && (
           <ViewArea>
-            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Essenplan</h1>
+            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Mittagessen</h1>
             <ul>
               {meals.map((meal) => (
                 <li key={meal.mealDate}>

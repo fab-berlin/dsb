@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { LoginRequestBody } from '@/types/types';
 
 export interface ReplacementClassData {
   name: string;
@@ -20,6 +21,7 @@ type ReplacmentDate = {
 };
 
 interface ClassReplacementStore {
+  userData: LoginRequestBody;
   parseAndSetData: (data: string[]) => void;
   replacements: Record<string, ReplacementClassDay>;
   isLoading: boolean;
@@ -27,6 +29,7 @@ interface ClassReplacementStore {
 }
 
 export const useClassReplacementStore = create<ClassReplacementStore>((set) => ({
+  userData: { user: '', password: '' },
   replacements: {},
   isLoading: false,
   error: null,

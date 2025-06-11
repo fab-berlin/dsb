@@ -13,6 +13,7 @@ const config: Config = {
         foreground: 'var(--foreground)',
       },
       fontSize: {
+        xs: '0.6rem',
         xxs: '0.5rem',
       },
     },

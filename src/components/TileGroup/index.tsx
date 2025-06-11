@@ -1,4 +1,4 @@
-import { useClassReplacementStore } from '@/app/store/useClassReplacement';
+import { useClassReplacementStore } from '@/store/useClassReplacement';
 import { useEffect, useState } from 'react';
 import { Select } from '@radix-ui/themes';
 import ReplacementTile from '@/components/ReplacementTile';

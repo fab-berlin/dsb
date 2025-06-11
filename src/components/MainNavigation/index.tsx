@@ -1,9 +1,9 @@
 'use client';
 
-import { BackpackIcon, CookieIcon, TableIcon } from '@radix-ui/react-icons';
+import { BackpackIcon, CookieIcon, GearIcon, TableIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 
 const MainNavigation = () => {
   const { authToken } = useAuthentication();
@@ -43,6 +43,15 @@ const MainNavigation = () => {
               height="30"
             />
           </MainNavigationItem>
+          <MainNavigationItem
+            label={'Einstellungen'}
+            route={'/settings'}
+          >
+            <GearIcon
+              width="30"
+              height="30"
+            />
+          </MainNavigationItem>
         </nav>
       )}
     </>
@@ -70,7 +79,7 @@ const MainNavigationItem = ({
   };
 
   return (
-    <div className="w-1/3">
+    <div className="w-1/4">
       <a
         href={route}
         className={`flex flex-col items-center justify-center gap-y-1 ${activeClass}`}

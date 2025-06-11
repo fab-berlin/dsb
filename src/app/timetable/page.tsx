@@ -6,7 +6,7 @@ import ViewArea from '@/components/ViewArea';
 import { useEffect, useState } from 'react';
 import type { Timetable } from '@/types/types';
 import TimetableView from '@/components/TimetableView';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
