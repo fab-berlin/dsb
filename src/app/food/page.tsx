@@ -2,10 +2,10 @@
 
 import { Theme } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useMeals } from '@/app/store/useMeals';
+import { useMeals } from '@/store/useMeals';
 import MealDetail from '@/components/MealDetail';
 
 export default function Page() {

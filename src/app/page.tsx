@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useClassReplacementStore } from '@/app/store/useClassReplacement';
+import { useClassReplacementStore } from '@/store/useClassReplacement';
 import { Theme, Spinner } from '@radix-ui/themes';
 
 import '@radix-ui/themes/styles.css';
@@ -9,7 +9,7 @@ import '@radix-ui/themes/styles.css';
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 import VersionBadge from '@/components/VersionBadge';
 
 export default function Home() {

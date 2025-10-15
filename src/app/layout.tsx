@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import MainNavigation from '@/components/MainNavigation';
 import App from '@/app/_app';
+import { DeviceProvider } from '@/contexts/deviceContext';
 
 export const metadata: Metadata = {
   title: 'DSB - in beautiful',
@@ -25,8 +26,10 @@ export default function RootLayout({
       <body>
         <div className="px-4">
           <App>
-            {children}
-            <MainNavigation />
+            <DeviceProvider>
+              {children}
+              <MainNavigation />
+            </DeviceProvider>
           </App>
         </div>
       </body>

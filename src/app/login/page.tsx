@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { useAuthentication } from '@/app/store/useAuthentication';
+import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
 import { Button, Card, Flex, Switch, TextField, Theme, Text } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';

@@ -1,4 +1,4 @@
-import { Meal } from '@/app/store/useMeals';
+import { Meal } from '@/store/useMeals';
 import { useEffect, useState } from 'react';
 import { Avatar } from '@radix-ui/themes';
 
