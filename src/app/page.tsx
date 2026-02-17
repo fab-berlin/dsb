@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { useClassReplacementStore } from '@/store/useClassReplacement';
 import { Theme, Spinner } from '@radix-ui/themes';
 
-import '@radix-ui/themes/styles.css';
-
 import TileGroup from '@/components/TileGroup';
 import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
