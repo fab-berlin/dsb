@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useDocuments } from '@/store/useDocuments';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Lightbox from 'yet-another-react-lightbox';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -34,6 +35,7 @@ const DocumentsGroup = () => {
             <Swiper
               spaceBetween={24}
               slidesPerView={4}
+              loop={false}
             >
               {doc.children.map((child, index) => (
                 <SwiperSlide key={child.id}>
@@ -55,6 +57,11 @@ const DocumentsGroup = () => {
         close={() => setLightboxOpen(false)}
         index={lightboxIndex}
         slides={lightboxSlides}
+        plugins={[Zoom]}
+        zoom={{
+          maxZoomPixelRatio: 3,
+          scrollToZoom: true,
+        }}
       />
     </div>
   );
