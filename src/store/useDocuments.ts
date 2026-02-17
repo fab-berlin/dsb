@@ -8,7 +8,7 @@ interface DocumentsStore {
   setData: (data: DocumentDataProps[]) => void;
 }
 
-export const useDocuments = create<DocumentsStore>((set, get) => ({
+export const useDocuments = create<DocumentsStore>((set) => ({
   documents: [],
   isLoading: false,
   error: null,
