@@ -11,6 +11,7 @@ import ViewArea from '@/components/ViewArea';
 import { useRouter } from 'next/navigation';
 import { useAuthentication } from '@/store/useAuthentication';
 import VersionBadge from '@/components/VersionBadge';
+import LoginGroup from '@/components/LoginGroup/indext';
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -37,44 +38,46 @@ export default function Home() {
     }
   }, [authToken, router, setAuthToken]);
 
-  useEffect(() => {
-    if (!authToken) {
-      router.push('/login');
-    }
-  }, [authToken, router]);
+  // useEffect(() => {
+  //   if (!authToken) {
+  //     router.push('/login');
+  //   }
+  // }, [authToken, router]);
 
   useEffect(() => {
-    setManualUpdate(true);
-    const controller = new AbortController();
-    const signal = controller.signal;
+    if (authToken) {
+      setManualUpdate(true);
+      const controller = new AbortController();
+      const signal = controller.signal;
 
-    const fetchData = async () => {
-      const response = await fetch('/api', {
-        signal,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ authToken }),
+      const fetchData = async () => {
+        const response = await fetch('/api', {
+          signal,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ authToken }),
+        });
+        const data = await response.json();
+
+        if (data.error) {
+          resetLogin();
+        }
+
+        await parseAndSetData(data);
+        await setManualUpdate(false);
+      };
+
+      fetchData().catch((err) => {
+        if (err.name === 'AbortError') {
+          console.log('Fetch aborted');
+          // This is normal during cleanup, so we don't need to set an error state
+        }
       });
-      const data = await response.json();
 
-      if (data.error) {
-        resetLogin();
-      }
-
-      await parseAndSetData(data);
-      await setManualUpdate(false);
-    };
-
-    fetchData().catch((err) => {
-      if (err.name === 'AbortError') {
-        console.log('Fetch aborted');
-        // This is normal during cleanup, so we don't need to set an error state
-      }
-    });
-
-    return () => controller.abort();
+      return () => controller.abort();
+    }
   }, [authToken, parseAndSetData]);
 
   const handleUpdate = async () => {
@@ -110,6 +113,7 @@ export default function Home() {
             </h1>
             <VersionBadge />
           </div>
+          {!authToken && <LoginGroup />}
           {!manualUpdate && <TileGroup />}
           {manualUpdate && (
             <div

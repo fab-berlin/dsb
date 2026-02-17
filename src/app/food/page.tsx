@@ -2,22 +2,12 @@
 
 import { Theme } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
-import { useAuthentication } from '@/store/useAuthentication';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useMeals } from '@/store/useMeals';
 import MealDetail from '@/components/MealDetail';
 
 export default function Page() {
-  const { authToken } = useAuthentication();
-  const router = useRouter();
   const { meals, parseMeals } = useMeals();
-
-  useEffect(() => {
-    if (!authToken) {
-      router.push('/login');
-    }
-  }, [authToken, router]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -52,21 +42,19 @@ export default function Page() {
         appearance="dark"
         hasBackground={false}
       >
-        {authToken && (
-          <ViewArea>
-            <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Mittagessen</h1>
-            <ul className={'flex flex-col gap-y-4'}>
-              {meals.map((meal) => (
-                <li key={meal.mealDate}>
-                  <MealDetail
-                    mealName={meal.mealName}
-                    mealDate={meal.mealDate}
-                  />
-                </li>
-              ))}
-            </ul>
-          </ViewArea>
-        )}
+        <ViewArea>
+          <h1 className={'mb-8 pt-4 text-2xl font-bold'}>Mittagessen</h1>
+          <ul className={'flex flex-col gap-y-4'}>
+            {meals.map((meal) => (
+              <li key={meal.mealDate}>
+                <MealDetail
+                  mealName={meal.mealName}
+                  mealDate={meal.mealDate}
+                />
+              </li>
+            ))}
+          </ul>
+        </ViewArea>
       </Theme>
     </main>
   );

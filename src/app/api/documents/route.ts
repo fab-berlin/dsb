@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { DocumentDataProps, DsbEntry } from '@/types/types';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { authToken } = body;
-  const replacementData: string[] = [];
+  const documentsData: DocumentDataProps[] = [];
   const data = await fetch(`https://mobileapi.dsbcontrol.de/dsbdocuments?authid=${authToken}`);
   const childData = await data.json();
 
@@ -12,15 +13,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: childData.Message });
   }
 
-  // TODO change the response handling to the actual return of the endpoint
-  for (const el of childData[0].Childs) {
-    try {
-      const response = await fetch(el.Detail);
-      const detailData = await response.text();
-      replacementData.push(detailData);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-  return NextResponse.json(replacementData);
+  childData.forEach((item: DsbEntry) => {
+    documentsData.push({ id: item.Id, date: item.Date, title: item.Title, children: [] });
+    item.Childs.forEach((child) => {
+      documentsData[documentsData.length - 1].children.push({
+        id: child.Id,
+        date: child.Date,
+        title: child.Title,
+        detail: child.Detail,
+      });
+    });
+  });
+
+  return NextResponse.json(documentsData.reverse());
 }
