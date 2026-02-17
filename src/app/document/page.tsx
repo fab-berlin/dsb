@@ -20,7 +20,6 @@ export default function Page() {
       const token = sessionStorage.getItem('authToken');
       if (token) {
         setAuthToken(token);
-        router.push('/');
       }
     }
   }, [authToken, router, setAuthToken]);

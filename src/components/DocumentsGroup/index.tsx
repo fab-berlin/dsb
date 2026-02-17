@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'yet-another-react-lightbox/styles.css';
+import Image from 'next/image';
 
 const DocumentsGroup = () => {
   const { documents } = useDocuments();
@@ -39,12 +40,16 @@ const DocumentsGroup = () => {
             >
               {doc.children.map((child, index) => (
                 <SwiperSlide key={child.id}>
-                  <img
-                    src={child.detail}
-                    alt={''}
-                    onClick={() => openLightbox(doc.children, index)}
-                    className="cursor-pointer"
-                  />
+                  <div className="relative aspect-3/4 w-full">
+                    <Image
+                      src={child.detail}
+                      alt={''}
+                      fill
+                      sizes="25vw"
+                      onClick={() => openLightbox(doc.children, index)}
+                      className="cursor-pointer object-cover"
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
