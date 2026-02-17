@@ -1,6 +1,6 @@
 'use client';
 
-import { BackpackIcon, CookieIcon, TableIcon } from '@radix-ui/react-icons';
+import { BackpackIcon, CookieIcon, TableIcon, ReaderIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthentication } from '@/store/useAuthentication';
@@ -25,6 +25,15 @@ const MainNavigation = () => {
             route={'/'}
           >
             <BackpackIcon
+              width="30"
+              height="30"
+            />
+          </MainNavigationItem>
+          <MainNavigationItem
+            label={'Aushänge'}
+            route={'/document'}
+          >
+            <ReaderIcon
               width="30"
               height="30"
             />

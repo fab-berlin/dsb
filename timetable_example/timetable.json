@@ -1,0 +1,205 @@
+{
+  "timetable": [
+    {
+      "day": "Montag",
+      "hours": [
+        {
+          "name": "Sport",
+          "type": "sp",
+          "length": "60",
+          "startType": "E",
+          "startTime": "8:15",
+          "endTime": "9:15"
+        },
+        {
+          "name": "Musik",
+          "type": "mu",
+          "length": "60",
+          "startType": "A",
+          "startTime": "9:25",
+          "endTime": "10:25"
+        },
+        {
+          "name": "Deutsch",
+          "type": "de",
+          "length": "60",
+          "startType": "A",
+          "startTime": "11:10",
+          "endTime": "12:10"
+        },
+        {
+          "name": "Geschichte/PB",
+          "type": "ge",
+          "length": "75",
+          "startType": "A",
+          "startTime": "12:55",
+          "endTime": "14:10"
+        },
+        {
+          "name": "PK8A",
+          "type": "pk",
+          "length": "75",
+          "startType": "A",
+          "startTime": "14:20",
+          "endTime": "15:35"
+        }
+      ]
+    },
+    {
+      "day": "Dienstag",
+      "hours": [
+        {
+          "name": "Ethik",
+          "type": "et",
+          "length": "75",
+          "startType": "A",
+          "startTime": "8:00",
+          "endTime": "9:15"
+        },
+        {
+          "name": "Deutsch",
+          "type": "de",
+          "length": "75",
+          "startType": "A",
+          "startTime": "9:25",
+          "endTime": "10:40"
+        },
+        {
+          "name": "Mathe",
+          "type": "ma",
+          "length": "75",
+          "startType": "A",
+          "startTime": "11:10",
+          "endTime": "12:25"
+        },
+        {
+          "name": "Spanisch",
+          "type": "es",
+          "length": "75",
+          "startType": "A",
+          "startTime": "12:55",
+          "endTime": "14:10"
+        },
+        {
+          "name": "Englisch",
+          "type": "en",
+          "length": "60",
+          "startType": "A",
+          "startTime": "14:20",
+          "endTime": "15:20"
+        }
+      ]
+    },
+    {
+      "day": "Mittwoch",
+      "hours": [
+        {
+          "name": "Kunst",
+          "type": "ku",
+          "length": "60",
+          "startType": "E",
+          "startTime": "8:15",
+          "endTime": "9:15"
+        },
+        {
+          "name": "Mathe",
+          "type": "ma",
+          "length": "75",
+          "startType": "A",
+          "startTime": "9:25",
+          "endTime": "10:40"
+        },
+        {
+          "name": "Biologie",
+          "type": "bi",
+          "length": "75",
+          "startType": "A",
+          "startTime": "11:10",
+          "endTime": "12:25"
+        },
+        {
+          "name": "Deutsch",
+          "type": "de",
+          "length": "75",
+          "startType": "A",
+          "startTime": "12:55",
+          "endTime": "14:10"
+        }
+      ]
+    },
+    {
+      "day": "Donnerstag",
+      "hours": [
+        {
+          "name": "Erdkunde",
+          "type": "ek",
+          "length": "60",
+          "startType": "E",
+          "startTime": "8:15",
+          "endTime": "9:15"
+        },
+        {
+          "name": "Religion",
+          "type": "re",
+          "length": "75",
+          "startType": "A",
+          "startTime": "9:25",
+          "endTime": "10:40"
+        },
+        {
+          "name": "Sport",
+          "type": "sp",
+          "length": "75",
+          "startType": "A",
+          "startTime": "11:10",
+          "endTime": "12:25"
+        },
+        {
+          "name": "PK8B",
+          "type": "pk",
+          "length": "75",
+          "startType": "A",
+          "startTime": "12:55",
+          "endTime": "14:10"
+        }
+      ]
+    },
+    {
+      "day": "Freitag",
+      "hours": [
+        {
+          "name": "Spanisch",
+          "type": "es",
+          "length": "75",
+          "startType": "A",
+          "startTime": "8:00",
+          "endTime": "9:15"
+        },
+        {
+          "name": "Englisch",
+          "type": "en",
+          "length": "75",
+          "startType": "A",
+          "startTime": "9:25",
+          "endTime": "10:40"
+        },
+        {
+          "name": "Chemie",
+          "type": "ch",
+          "length": "75",
+          "startType": "A",
+          "startTime": "11:10",
+          "endTime": "12:25"
+        },
+        {
+          "name": "Physik",
+          "type": "ph",
+          "length": "75",
+          "startType": "A",
+          "startTime": "12:55",
+          "endTime": "14:10"
+        }
+      ]
+    }
+  ]
+}

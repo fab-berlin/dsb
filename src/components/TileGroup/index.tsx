@@ -54,7 +54,12 @@ const TileGroup = () => {
             {...(isDateAvailable && !manualTrigger && { value: currentDateString })}
             {...(isDateAvailable && manualTrigger && { value: chosenDate })}
           >
-            <Select.Trigger placeholder="wähle den Tag">{chosenDate}</Select.Trigger>
+            <Select.Trigger
+              placeholder="wähle den Tag"
+              className="select-trigger-large"
+            >
+              {chosenDate}
+            </Select.Trigger>
             <Select.Content
               position="popper"
               sideOffset={5}
@@ -78,7 +83,12 @@ const TileGroup = () => {
                 onValueChange={handleClassSelect}
                 size="3"
               >
-                <Select.Trigger placeholder="wähle die Klasse">{chosenClass}</Select.Trigger>
+                <Select.Trigger
+                  placeholder="wähle die Klasse"
+                  className="select-trigger-large"
+                >
+                  {chosenClass}
+                </Select.Trigger>
                 <Select.Content
                   position="popper"
                   sideOffset={5}
