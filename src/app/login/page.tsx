@@ -12,8 +12,12 @@ export default function Page() {
   const router = useRouter();
   const { authToken, setAuthToken } = useAuthentication();
 
-  const [savedUser, setSavedUser] = useState('');
-  const [savedPass, setSavedPass] = useState('');
+  const [savedUser] = useState(() =>
+    typeof window !== 'undefined' ? (localStorage.getItem('user') ?? '') : ''
+  );
+  const [savedPass] = useState(() =>
+    typeof window !== 'undefined' ? (localStorage.getItem('password') ?? '') : ''
+  );
 
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -40,11 +44,6 @@ export default function Page() {
     }
     router.push('/');
   };
-
-  useEffect(() => {
-    setSavedUser(localStorage.getItem('user') ?? '');
-    setSavedPass(localStorage.getItem('password') ?? '');
-  }, []);
 
   useEffect(() => {
     if (authToken) router.push('/');

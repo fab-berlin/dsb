@@ -1,14 +1,14 @@
 import { Meal } from '@/store/useMeals';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { Avatar } from '@radix-ui/themes';
 
 const MealDetail = ({ mealName, mealDate }: Meal) => {
-  const [parsedDate, setParsedDate] = useState('');
-  const [weekday, setWeekday] = useState('');
-  useEffect(() => {
+  const { parsedDate, weekday } = useMemo(() => {
     const currDate = new Date(mealDate);
-    setWeekday(currDate.toLocaleDateString('de-DE', { weekday: 'short' }));
-    setParsedDate(currDate.toLocaleDateString());
+    return {
+      weekday: currDate.toLocaleDateString('de-DE', { weekday: 'short' }),
+      parsedDate: currDate.toLocaleDateString(),
+    };
   }, [mealDate]);
 
   return (

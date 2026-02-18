@@ -12,7 +12,6 @@ import VersionBadge from '@/components/VersionBadge';
 import LoginGroup from '@/components/LoginGroup/indext';
 
 export default function Home() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter();
   const [manualUpdate, setManualUpdate] = useState(false);
   const { parseAndSetData } = useClassReplacementStore();
@@ -36,19 +35,13 @@ export default function Home() {
     }
   }, [authToken, router, setAuthToken]);
 
-  // useEffect(() => {
-  //   if (!authToken) {
-  //     router.push('/login');
-  //   }
-  // }, [authToken, router]);
-
   useEffect(() => {
     if (authToken) {
-      setManualUpdate(true);
       const controller = new AbortController();
       const signal = controller.signal;
 
       const fetchData = async () => {
+        setManualUpdate(true);
         const response = await fetch('/api', {
           signal,
           method: 'POST',

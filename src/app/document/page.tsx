@@ -46,13 +46,12 @@ export default function Page() {
       fetchData().catch((err) => {
         if (err.name === 'AbortError') {
           console.log('Fetch aborted');
-          // This is normal during cleanup, so we don't need to set an error state
         }
       });
 
       return () => controller.abort();
     }
-  }, [authToken]);
+  }, [authToken, setData]);
 
   return (
     <main className={'h-screen overflow-hidden'}>

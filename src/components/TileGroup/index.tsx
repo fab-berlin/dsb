@@ -1,5 +1,5 @@
 import { useClassReplacementStore } from '@/store/useClassReplacement';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Select } from '@radix-ui/themes';
 import ReplacementTile from '@/components/ReplacementTile';
 import NoResultTile from '@/components/NoResultTile';
@@ -10,9 +10,6 @@ const TileGroup = () => {
   const [manualTrigger, setManualTrigger] = useState(false);
   const [chosenDate, setChosenDate] = useState('');
   const [chosenClass, setChosenClass] = useState('');
-  const [isDateAvailable, setIsDateAvailable] = useState(false);
-
-  const [availableClasses, setAvailableClasses] = useState<string[]>([]);
 
   const currentDate = new Date();
   const currentDateString = currentDate.toLocaleDateString('de-DE', {
@@ -39,20 +36,18 @@ const TileGroup = () => {
     setChosenClass(e.currentTarget.value);
   };
 
-  useEffect(() => {
+  const isDateAvailable = currentDateString in replacements;
+
+  const effectiveDate = !manualTrigger && isDateAvailable ? currentDateString : chosenDate;
+
+  const availableClasses = useMemo(() => {
     const uniqueClassesSet = new Set(
-      replacements[chosenDate]?.classData
+      replacements[effectiveDate]?.classData
         ?.map((el) => el?.name)
         .filter((name): name is string => name !== undefined)
     );
-    const uniqueClasses = Array.from(uniqueClassesSet);
-    setAvailableClasses(uniqueClasses);
-  }, [chosenDate, replacements]);
-
-  useEffect(() => {
-    setIsDateAvailable(currentDateString in replacements);
-    if (currentDateString in replacements) setChosenDate(currentDateString);
-  }, [currentDateString, replacements]);
+    return Array.from(uniqueClassesSet);
+  }, [effectiveDate, replacements]);
 
   return (
     <>
@@ -81,14 +76,13 @@ const TileGroup = () => {
             <Select.Root
               onValueChange={handleSelect}
               size="3"
-              {...(isDateAvailable && !manualTrigger && { value: currentDateString })}
-              {...(isDateAvailable && manualTrigger && { value: chosenDate })}
+              value={effectiveDate || undefined}
             >
               <Select.Trigger
                 placeholder="wähle den Tag"
                 className="select-trigger-large"
               >
-                {chosenDate}
+                {effectiveDate}
               </Select.Trigger>
               <Select.Content
                 position="popper"
@@ -108,7 +102,7 @@ const TileGroup = () => {
             </Select.Root>
           </div>
 
-          {chosenDate && (
+          {effectiveDate && (
             <>
               <div className={'relative block max-w-1/2 md:hidden'}>
                 <select
@@ -163,14 +157,14 @@ const TileGroup = () => {
         </div>
       )}
 
-      {chosenDate !== '' && (
+      {effectiveDate !== '' && (
         <div
           className={
             'my-4 grid h-[calc(100vh-184px-60px)] grid-cols-1 gap-4 overflow-auto sm:grid-cols-2 md:grid-cols-4'
           }
         >
-          {replacements[chosenDate].classData
-            .filter((el) => {
+          {replacements[effectiveDate]?.classData
+            ?.filter((el) => {
               if (chosenClass === '---' || !chosenClass.trim()) return true;
               return el?.name === chosenClass;
             })
@@ -180,7 +174,7 @@ const TileGroup = () => {
                 key={i}
               />
             ))}
-          {replacements[chosenDate].classData.filter((el) => {
+          {replacements[effectiveDate]?.classData?.filter((el) => {
             if (chosenClass === '---' || !chosenClass.trim()) return true;
             return el?.name === chosenClass;
           }).length === 0 && <NoResultTile />}
