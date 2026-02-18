@@ -30,9 +30,18 @@ const DocumentsGroup = () => {
     <div className={'h-[calc(100vh-184px-60px)] overflow-auto'}>
       <ul>
         {documents.map((doc) => (
-          <li key={doc.id}>
-            <p>{doc.date}</p>
-            <p>{doc.title}</p>
+          <li
+            key={doc.id}
+            className={'mb-4 border-b border-gray-600 pb-4 last:border-b-0'}
+          >
+            <p className={'rounded-sm rounded-b-none bg-orange-500 px-2 py-1'}>{doc.date}</p>
+            <p
+              className={
+                'mb-2 rounded-sm rounded-t-none border border-t-0 border-gray-600 px-2 py-1'
+              }
+            >
+              {doc.title}
+            </p>
             <Swiper
               spaceBetween={24}
               slidesPerView={4}

@@ -110,7 +110,7 @@ const TileGroup = () => {
 
           {chosenDate && (
             <>
-              <div className={'relative block max-w-1/4 md:hidden'}>
+              <div className={'relative block max-w-1/2 md:hidden'}>
                 <select
                   className={
                     'w-full appearance-none rounded-md border border-gray-600 px-4 py-2 text-lg focus-visible:outline-none'
