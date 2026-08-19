@@ -76,7 +76,7 @@ const TileGroup = () => {
             <Select.Root
               onValueChange={handleSelect}
               size="3"
-              value={effectiveDate || undefined}
+              value={effectiveDate}
             >
               <Select.Trigger
                 placeholder="wähle den Tag"
@@ -110,6 +110,7 @@ const TileGroup = () => {
                     'w-full appearance-none rounded-md border border-gray-600 px-4 py-2 text-lg focus-visible:outline-none'
                   }
                   onChange={handleClassSelectNative}
+                  value={effectiveDate}
                 >
                   <option value="---">wähle die Klasse</option>
                   {availableClasses.map((name) => (
@@ -127,6 +128,7 @@ const TileGroup = () => {
                 <Select.Root
                   onValueChange={handleClassSelect}
                   size="3"
+                  value={chosenClass || '---'}
                 >
                   <Select.Trigger
                     placeholder="wähle die Klasse"
