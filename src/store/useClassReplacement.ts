@@ -50,14 +50,15 @@ export const useClassReplacementStore = create<ClassReplacementStore>((set) => (
             const cells = Array.from(row.getElementsByTagName('td'));
             if (cells.length > 1) {
               return {
-                name: cells[2].textContent ?? '',
-                hour: cells[0].textContent ?? '',
-                newLesson: cells[3].textContent ?? '',
-                newRoom: cells[4].textContent ?? '',
+                name: cells[0].textContent ?? '',
+                hour: cells[1].textContent ?? '',
+                newLesson: cells[2].textContent ?? '',
+                newRoom: cells[3].textContent ?? '',
                 oldLesson: cells[5].textContent ?? '',
-                oldRoom: cells[6].textContent ?? '',
-                message: cells[7].textContent ?? '',
-                cancellation: cells[8].textContent ?? '',
+                // oldRoom: cells[5].textContent ?? '',
+                oldRoom: '',
+                message: cells[6].textContent ?? '',
+                cancellation: cells[7].textContent ?? '',
               };
             }
             return null;

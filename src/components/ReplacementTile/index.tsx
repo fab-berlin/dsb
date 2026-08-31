@@ -21,7 +21,7 @@ const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
               '@container flex h-8 min-w-8 items-center justify-center rounded-full bg-white px-2'
             }
           >
-            <span className="@lg:text-blue-500 text-center text-xl text-orange-500">
+            <span className="text-center text-xl text-orange-500 @lg:text-blue-500">
               {el?.hour}
             </span>
           </div>
@@ -38,12 +38,20 @@ const ReplacementTile = ({ el }: { el: ReplacementClassData | null }) => {
           <dd className={'w-2/3 font-bold'}>{el?.newRoom}</dd>
         </dl>
       )}
-      {el?.oldLesson.trim() && el?.oldRoom.trim() && (
+      {(el?.oldLesson.trim() || el?.oldRoom.trim()) && (
         <dl className={'mb-4 flex flex-row flex-wrap items-baseline opacity-35'}>
-          <dt className={'w-1/3 text-xs'}>Fach alt</dt>
-          <dd className={'w-2/3 font-bold'}>{el?.oldLesson}</dd>
-          <dt className={'w-1/3 text-xs'}>Raum alt</dt>
-          <dd className={'w-2/3 font-bold'}>{el?.oldRoom}</dd>
+          {el?.oldLesson.trim() && (
+            <>
+              <dt className={'w-1/3 text-xs'}>Fach alt</dt>
+              <dd className={'w-2/3 font-bold'}>{el?.oldLesson}</dd>
+            </>
+          )}
+          {el?.oldRoom.trim() && (
+            <>
+              <dt className={'w-1/3 text-xs'}>Raum alt</dt>
+              <dd className={'w-2/3 font-bold'}>{el?.oldRoom}</dd>
+            </>
+          )}
         </dl>
       )}
       {el?.message.trim() && (
