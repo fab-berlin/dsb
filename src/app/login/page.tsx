@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
 import { Button, Card, Flex, Switch, TextField, Theme, Text } from '@radix-ui/themes';
@@ -9,6 +9,8 @@ import ViewArea from '@/components/ViewArea';
 import '@radix-ui/themes/styles.css';
 
 export default function Page() {
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const { authToken, setAuthToken } = useAuthentication();
 
@@ -49,6 +51,12 @@ export default function Page() {
     if (authToken) router.push('/');
   }, [authToken, router]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      submitButtonRef.current?.focus();
+    }, 10);
+  }, []);
+
   return (
     <main className={'h-screen overflow-hidden'}>
       <Theme
@@ -75,6 +83,7 @@ export default function Page() {
                     required
                     size={'3'}
                     defaultValue={savedUser}
+                    ref={usernameRef}
                   ></TextField.Root>
                   <TextField.Root
                     placeholder={'Passwort'}
@@ -102,6 +111,7 @@ export default function Page() {
                     type={'submit'}
                     size={'3'}
                     variant={'soft'}
+                    ref={submitButtonRef}
                   >
                     Login
                   </Button>

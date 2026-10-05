@@ -1,6 +1,6 @@
 'use client';
 
-import { BackpackIcon, CookieIcon, TableIcon, ReaderIcon } from '@radix-ui/react-icons';
+import { BackpackIcon, TableIcon, ReaderIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 // import { useDevice } from '@/contexts/deviceContext';
@@ -40,15 +40,6 @@ const MainNavigation = () => {
           route={'/timetable'}
         >
           <TableIcon
-            width="30"
-            height="30"
-          />
-        </MainNavigationItem>
-        <MainNavigationItem
-          label={'Mittagessen'}
-          route={'/food'}
-        >
-          <CookieIcon
             width="30"
             height="30"
           />
