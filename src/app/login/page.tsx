@@ -1,9 +1,9 @@
 'use client';
 
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { useAuthentication } from '@/store/useAuthentication';
 import { useRouter } from 'next/navigation';
-import { Button, Card, Flex, Switch, TextField, Theme, Text } from '@radix-ui/themes';
+import { Button, Card, Flex, TextField, Theme } from '@radix-ui/themes';
 import ViewArea from '@/components/ViewArea';
 
 import '@radix-ui/themes/styles.css';
@@ -14,20 +14,12 @@ export default function Page() {
   const router = useRouter();
   const { authToken, setAuthToken } = useAuthentication();
 
-  const [savedUser] = useState(() =>
-    typeof window !== 'undefined' ? (localStorage.getItem('user') ?? '') : ''
-  );
-  const [savedPass] = useState(() =>
-    typeof window !== 'undefined' ? (localStorage.getItem('password') ?? '') : ''
-  );
-
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.currentTarget);
     const username = formData.get('username');
     const password = formData.get('password');
-    const saveCredentials = formData.get('persistcredentials') === 'on';
 
     const response = await fetch('/api/authenticate', {
       method: 'POST',
@@ -38,12 +30,6 @@ export default function Page() {
     });
     const token = await response.json();
     setAuthToken(token.authToken);
-    sessionStorage.setItem('authToken', token.authToken);
-
-    if (token.authToken && saveCredentials) {
-      localStorage.setItem('user', username as string);
-      localStorage.setItem('password', password as string);
-    }
     router.push('/');
   };
 
@@ -80,33 +66,19 @@ export default function Page() {
                   <TextField.Root
                     placeholder={'Username'}
                     name={'username'}
+                    autoComplete={'username'}
                     required
                     size={'3'}
-                    defaultValue={savedUser}
                     ref={usernameRef}
                   ></TextField.Root>
                   <TextField.Root
                     placeholder={'Passwort'}
                     name={'password'}
+                    autoComplete={'current-password'}
                     required
                     size={'3'}
                     type={'password'}
-                    defaultValue={savedPass}
                   ></TextField.Root>
-                  <Text
-                    as="label"
-                    size="2"
-                    className={'my-4'}
-                  >
-                    <Flex gap="2">
-                      <Switch
-                        name={'persistcredentials'}
-                        size="3"
-                        defaultChecked
-                      />
-                      Daten speichern
-                    </Flex>
-                  </Text>
                   <Button
                     type={'submit'}
                     size={'3'}
